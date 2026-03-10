@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { supabase } from "@/integrations/supabase/client";
 import p1 from "@/assets/portfolio-1.jpg";
 import p2 from "@/assets/portfolio-2.jpg";
 import p3 from "@/assets/portfolio-3.jpg";
@@ -7,7 +9,7 @@ import p4 from "@/assets/portfolio-4.jpg";
 import p5 from "@/assets/portfolio-5.jpg";
 import p6 from "@/assets/portfolio-6.jpg";
 
-const images = [
+const fallbackImages = [
   { src: p1, alt: "Дракон" },
   { src: p2, alt: "Киберпанк" },
   { src: p3, alt: "Самурай" },
@@ -17,6 +19,23 @@ const images = [
 ];
 
 const AllWorks = () => {
+  const [dbImages, setDbImages] = useState<{ src: string; alt: string }[]>([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const { data } = await supabase
+        .from("portfolio_images")
+        .select("*")
+        .order("display_order", { ascending: true });
+      if (data && data.length > 0) {
+        setDbImages(data.map((img) => ({ src: img.image_url, alt: img.title })));
+      }
+    };
+    fetchImages();
+  }, []);
+
+  const images = dbImages.length > 0 ? dbImages : fallbackImages;
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
