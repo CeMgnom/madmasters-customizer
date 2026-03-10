@@ -28,7 +28,7 @@ const HeroSection = () => {
                 Заказать дизайн
               </Button>
             </a>
-            <a href="#portfolio">
+            <a href="/all-works">
               <Button size="lg" variant="outline" className="border-primary/40 text-foreground hover:bg-primary/10 font-display text-sm tracking-wider">
                 Смотреть работы
               </Button>

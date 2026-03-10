@@ -57,7 +57,7 @@ const PortfolioSection = () => {
 
         <div className="text-center">
           <Link to="/all-works">
-            <Button variant="outline" className="border-primary/40 text-foreground hover:bg-primary/10 font-display text-sm tracking-wider mb-4">
+            <Button className="gradient-primary text-primary-foreground font-display text-sm tracking-wider mb-4 hover:opacity-90 transition-opacity">
               Смотреть ещё
             </Button>
           </Link>

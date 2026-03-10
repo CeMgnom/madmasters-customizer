@@ -34,7 +34,7 @@ const ProcessSection = () => {
           Как мы работаем
         </motion.h2>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-10 relative">
+        <div className="grid md:grid-cols-3 gap-0 mb-10 relative">
           {steps.map((step, i) => (
             <motion.div
               key={i}
@@ -42,9 +42,9 @@ const ProcessSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.2 }}
-              className="group relative"
+              className="group relative flex items-stretch"
             >
-              <div className="gradient-card rounded-xl p-6 glow-border shadow-card h-full transition-all duration-300 hover:shadow-glow hover:-translate-y-1">
+              <div className="gradient-card rounded-xl p-6 glow-border shadow-card flex-1 transition-all duration-300 hover:shadow-glow hover:-translate-y-1 mx-4">
                 <div className="w-12 h-12 rounded-lg gradient-primary flex items-center justify-center mb-4">
                   <step.icon className="text-primary-foreground" size={24} />
                 </div>
@@ -53,9 +53,11 @@ const ProcessSection = () => {
                 <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
               </div>
 
-              {/* Connector line */}
+              {/* Connector line spanning from card border to next card border */}
               {i < steps.length - 1 && (
-                <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-primary/40 to-accent/40 group-hover:from-primary group-hover:to-accent transition-all duration-500" />
+                <div className="hidden md:flex absolute top-1/2 -right-0 w-8 h-0.5 items-center z-10">
+                  <div className="w-full h-0.5 bg-gradient-to-r from-primary/40 to-accent/40 group-hover:from-primary group-hover:to-accent transition-all duration-500" />
+                </div>
               )}
             </motion.div>
           ))}
