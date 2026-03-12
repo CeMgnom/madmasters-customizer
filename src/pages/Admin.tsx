@@ -252,9 +252,10 @@ const Admin = () => {
                     <TableHead className="text-muted-foreground">Дата</TableHead>
                     <TableHead className="text-muted-foreground">Имя</TableHead>
                     <TableHead className="text-muted-foreground">Телефон</TableHead>
-                    <TableHead className="text-muted-foreground">Телеграм</TableHead>
-                    <TableHead className="text-muted-foreground">Тариф</TableHead>
-                    <TableHead className="text-muted-foreground w-12"></TableHead>
+                     <TableHead className="text-muted-foreground">Телеграм</TableHead>
+                     <TableHead className="text-muted-foreground">Тариф</TableHead>
+                     <TableHead className="text-muted-foreground">Панели</TableHead>
+                     <TableHead className="text-muted-foreground w-12"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
