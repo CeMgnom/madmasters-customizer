@@ -27,6 +27,15 @@ const OrderForm = () => {
 
     setLoading(true);
     try {
+      // Save to database
+      await supabase.from("orders").insert({
+        name: form.name.trim(),
+        phone: form.phone.trim(),
+        telegram: form.telegram.trim(),
+        tariff: form.tariff,
+      });
+
+      // Send to Telegram
       const text = `🎮 Новая заявка MadMasters!\n\n👤 Имя: ${form.name}\n📱 Телефон: ${form.phone}\n💬 Телеграм: ${form.telegram || "не указан"}\n📋 Тариф: ${form.tariff}`;
 
       await fetch(
