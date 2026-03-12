@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.png";
 
 const navLinks = [
   { label: "Работы", href: "#portfolio" },
@@ -18,7 +17,6 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <a href="/" className="flex items-center gap-2">
-          <img src={logo} alt="MadMasters logo" className="h-8 w-8" />
           <span className="font-display text-xl font-bold text-gradient">MadMasters</span>
         </a>
 
