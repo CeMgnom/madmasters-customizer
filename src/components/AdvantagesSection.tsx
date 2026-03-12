@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Brush, Layers, Printer, Truck, ShieldCheck, Headphones } from "lucide-react";
 
 const advantages = [
-  { icon: Brush, title: "Уникальный дизайн", desc: "Каждый проект индивидуален — никаких шаблонов" },
+  { icon: Brush, title: "100% уникальность", desc: "Каждый дизайн создаётся индивидуально. Ваша панель будет единственной в мире." },
   { icon: Layers, title: "Любой дизайн", desc: "Воплотим любую идею в реальность" },
   { icon: Printer, title: "Качественная печать", desc: "Современное оборудование и стойкие краски" },
   { icon: Truck, title: "Быстрая доставка", desc: "Отправляем по всей России в кратчайшие сроки" },
