@@ -41,7 +41,7 @@ const OrderForm = () => {
       });
 
       // Send to Telegram
-      const text = `🎮 Новая заявка MadMasters!\n\n👤 Имя: ${form.name}\n📱 Телефон: ${form.phone}\n💬 Телеграм: ${form.telegram || "не указан"}\n📋 Тариф: ${form.tariff}`;
+      const text = `🎮 Новая заявка MadMasters!\n\n👤 Имя: ${form.name}\n📱 Телефон: ${form.phone}\n💬 Телеграм: ${form.telegram || "не указан"}\n📋 Тариф: ${form.tariff}\n🔧 Панели: ${form.panels}`;
 
       await fetch(
         `https://api.telegram.org/bot8796351983:AAHU55fM_H-wpb-eKkrA4L31Lj9ZUCL2ZYs/sendMessage`,
