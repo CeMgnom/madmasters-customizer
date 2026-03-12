@@ -272,8 +272,9 @@ const Admin = () => {
                       </TableCell>
                       <TableCell className="text-foreground font-medium">{order.name}</TableCell>
                       <TableCell className="text-foreground">{order.phone}</TableCell>
-                      <TableCell className="text-foreground">{order.telegram || "—"}</TableCell>
-                      <TableCell className="text-foreground text-sm">{order.tariff}</TableCell>
+                       <TableCell className="text-foreground">{order.telegram || "—"}</TableCell>
+                       <TableCell className="text-foreground text-sm">{order.tariff}</TableCell>
+                       <TableCell className="text-foreground text-sm">{order.panels || "—"}</TableCell>
                       <TableCell>
                         <Button
                           size="sm"
