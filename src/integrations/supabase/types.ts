@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      orders: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          phone: string
+          tariff: string
+          telegram: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          phone: string
+          tariff: string
+          telegram?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          phone?: string
+          tariff?: string
+          telegram?: string | null
+        }
+        Relationships: []
+      }
       portfolio_images: {
         Row: {
           created_at: string
