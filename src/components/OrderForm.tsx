@@ -57,7 +57,7 @@ const OrderForm = () => {
       );
 
       toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
-      setForm({ name: "", phone: "", telegram: "", tariff: tariffs[1] });
+      setForm({ name: "", phone: "", telegram: "", tariff: tariffs[1], panels: panelOptions[0].label });
     } catch {
       toast.error("Ошибка отправки. Попробуйте ещё раз или напишите нам в Телеграм.");
     } finally {
