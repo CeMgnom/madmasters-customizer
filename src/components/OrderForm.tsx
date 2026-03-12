@@ -8,6 +8,10 @@ import { toast } from "sonner";
 import { Send } from "lucide-react";
 
 const tariffs = ["Стандарт — 5 500 ₽", "Премиум — 6 500 ₽", "Эксклюзив — 9 500 ₽"];
+const panelOptions = [
+  { label: "На ваших панелях", extra: 0 },
+  { label: "На наших панелях (+2 000 ₽)", extra: 2000 },
+];
 
 const OrderForm = () => {
   const [loading, setLoading] = useState(false);
@@ -16,6 +20,7 @@ const OrderForm = () => {
     phone: "",
     telegram: "",
     tariff: tariffs[1],
+    panels: panelOptions[0].label,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,7 +41,7 @@ const OrderForm = () => {
       });
 
       // Send to Telegram
-      const text = `🎮 Новая заявка MadMasters!\n\n👤 Имя: ${form.name}\n📱 Телефон: ${form.phone}\n💬 Телеграм: ${form.telegram || "не указан"}\n📋 Тариф: ${form.tariff}`;
+      const text = `🎮 Новая заявка MadMasters!\n\n👤 Имя: ${form.name}\n📱 Телефон: ${form.phone}\n💬 Телеграм: ${form.telegram || "не указан"}\n📋 Тариф: ${form.tariff}\n🔧 Панели: ${form.panels}`;
 
       await fetch(
         `https://api.telegram.org/bot8796351983:AAHU55fM_H-wpb-eKkrA4L31Lj9ZUCL2ZYs/sendMessage`,
@@ -52,7 +57,7 @@ const OrderForm = () => {
       );
 
       toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
-      setForm({ name: "", phone: "", telegram: "", tariff: tariffs[1] });
+      setForm({ name: "", phone: "", telegram: "", tariff: tariffs[1], panels: panelOptions[0].label });
     } catch {
       toast.error("Ошибка отправки. Попробуйте ещё раз или напишите нам в Телеграм.");
     } finally {
@@ -137,8 +142,33 @@ const OrderForm = () => {
             </div>
           </div>
 
+          <div>
+            <Label className="text-foreground text-sm mb-1.5 block">Панели</Label>
+            <div className="space-y-2">
+              {panelOptions.map((p) => (
+                <label
+                  key={p.label}
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
+                    form.panels === p.label
+                      ? "bg-primary/15 glow-border"
+                      : "bg-muted/50 border border-border/50 hover:bg-muted"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="panels"
+                    value={p.label}
+                    checked={form.panels === p.label}
+                    onChange={(e) => setForm({ ...form, panels: e.target.value })}
+                    className="accent-primary"
+                  />
+                  <span className="text-sm text-foreground">{p.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
           <Button
-            type="submit"
             disabled={loading}
             className="w-full gradient-primary text-primary-foreground font-display text-sm tracking-wider hover:opacity-90 transition-opacity"
           >
