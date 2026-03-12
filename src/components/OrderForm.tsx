@@ -8,6 +8,10 @@ import { toast } from "sonner";
 import { Send } from "lucide-react";
 
 const tariffs = ["Стандарт — 5 500 ₽", "Премиум — 6 500 ₽", "Эксклюзив — 9 500 ₽"];
+const panelOptions = [
+  { label: "На ваших панелях", extra: 0 },
+  { label: "На наших панелях (+2 000 ₽)", extra: 2000 },
+];
 
 const OrderForm = () => {
   const [loading, setLoading] = useState(false);
@@ -16,6 +20,7 @@ const OrderForm = () => {
     phone: "",
     telegram: "",
     tariff: tariffs[1],
+    panels: panelOptions[0].label,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
