@@ -142,7 +142,32 @@ const OrderForm = () => {
             </div>
           </div>
 
-          <Button
+          <div>
+            <Label className="text-foreground text-sm mb-1.5 block">Панели</Label>
+            <div className="space-y-2">
+              {panelOptions.map((p) => (
+                <label
+                  key={p.label}
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
+                    form.panels === p.label
+                      ? "bg-primary/15 glow-border"
+                      : "bg-muted/50 border border-border/50 hover:bg-muted"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="panels"
+                    value={p.label}
+                    checked={form.panels === p.label}
+                    onChange={(e) => setForm({ ...form, panels: e.target.value })}
+                    className="accent-primary"
+                  />
+                  <span className="text-sm text-foreground">{p.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
             type="submit"
             disabled={loading}
             className="w-full gradient-primary text-primary-foreground font-display text-sm tracking-wider hover:opacity-90 transition-opacity"
