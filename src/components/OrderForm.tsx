@@ -38,6 +38,7 @@ const OrderForm = () => {
         phone: form.phone.trim(),
         telegram: form.telegram.trim(),
         tariff: form.tariff,
+        panels: form.panels,
       });
 
       // Send to Telegram
