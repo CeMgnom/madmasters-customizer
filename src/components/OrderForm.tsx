@@ -168,7 +168,7 @@ const OrderForm = () => {
             </div>
           </div>
 
-            type="submit"
+          <Button
             disabled={loading}
             className="w-full gradient-primary text-primary-foreground font-display text-sm tracking-wider hover:opacity-90 transition-opacity"
           >
