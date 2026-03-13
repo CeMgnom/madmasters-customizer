@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import p1 from "@/assets/portfolio-1.jpg";
 import p2 from "@/assets/portfolio-2.jpg";
 import p3 from "@/assets/portfolio-3.jpg";
@@ -20,6 +21,7 @@ const fallbackImages = [
 
 const AllWorks = () => {
   const [dbImages, setDbImages] = useState<{ src: string; alt: string }[]>([]);
+  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -48,7 +50,11 @@ const AllWorks = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {images.map((img, i) => (
-              <div key={i} className="group relative overflow-hidden rounded-xl glow-border shadow-card">
+              <div
+                key={i}
+                className="group relative overflow-hidden rounded-xl glow-border shadow-card cursor-pointer"
+                onClick={() => setSelectedImage(img)}
+              >
                 <img
                   src={img.src}
                   alt={img.alt}
@@ -70,6 +76,21 @@ const AllWorks = () => {
         </div>
       </main>
       <Footer />
+
+      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+        <DialogContent className="max-w-[90vw] max-h-[90vh] p-2 bg-background/95 border-border">
+          {selectedImage && (
+            <div className="flex flex-col items-center">
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                className="max-w-full max-h-[80vh] object-contain rounded-lg"
+              />
+              <span className="mt-2 text-sm font-display text-foreground">{selectedImage.alt}</span>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
