@@ -59,9 +59,9 @@ const AboutSection = () => {
             viewport={{ once: true }}
             className="grid grid-cols-2 gap-4"
           >
-            <img src={about1} alt="Процесс работы" className="rounded-xl shadow-card col-span-2 w-full h-48 object-cover" />
-            <img src={about2} alt="Печать на панели" className="rounded-xl shadow-card w-full h-40 object-cover" />
-            <img src={about3} alt="Покрытие лаком" className="rounded-xl shadow-card w-full h-40 object-cover" />
+            <img src={about1} alt="Процесс работы" className="rounded-xl shadow-card col-span-2 w-full h-64 object-cover" />
+            <img src={about2} alt="Печать на панели" className="rounded-xl shadow-card w-full h-56 object-cover" />
+            <img src={about3} alt="Покрытие лаком" className="rounded-xl shadow-card w-full h-56 object-cover" />
           </motion.div>
         </div>
       </div>
