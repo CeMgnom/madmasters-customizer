@@ -21,7 +21,7 @@ const fallbackImages = [
 
 const AllWorks = () => {
   const [dbImages, setDbImages] = useState<{ src: string; alt: string }[]>([]);
-  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchImages = async () => {
