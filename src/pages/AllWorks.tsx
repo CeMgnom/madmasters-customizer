@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import p1 from "@/assets/portfolio-1.jpg";
 import p2 from "@/assets/portfolio-2.jpg";
 import p3 from "@/assets/portfolio-3.jpg";
 import p4 from "@/assets/portfolio-4.jpg";
@@ -37,6 +38,25 @@ const AllWorks = () => {
   }, []);
 
   const images = dbImages.length > 0 ? dbImages : fallbackImages;
+  const selectedImage = selectedIndex !== null ? images[selectedIndex] : null;
+
+  const goPrev = useCallback(() => {
+    setSelectedIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : images.length - 1));
+  }, [images.length]);
+
+  const goNext = useCallback(() => {
+    setSelectedIndex((prev) => (prev !== null && prev < images.length - 1 ? prev + 1 : 0));
+  }, [images.length]);
+
+  useEffect(() => {
+    if (selectedIndex === null) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") goPrev();
+      else if (e.key === "ArrowRight") goNext();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [selectedIndex, goPrev, goNext]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -53,7 +73,7 @@ const AllWorks = () => {
               <div
                 key={i}
                 className="group relative overflow-hidden rounded-xl glow-border shadow-card cursor-pointer"
-                onClick={() => setSelectedImage(img)}
+                onClick={() => setSelectedIndex(i)}
               >
                 <img
                   src={img.src}
@@ -77,16 +97,32 @@ const AllWorks = () => {
       </main>
       <Footer />
 
-      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+      <Dialog open={selectedIndex !== null} onOpenChange={() => setSelectedIndex(null)}>
         <DialogContent className="max-w-[90vw] max-h-[90vh] p-2 bg-background/95 border-border">
           {selectedImage && (
-            <div className="flex flex-col items-center">
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.alt}
-                className="max-w-full max-h-[80vh] object-contain rounded-lg"
-              />
-              <span className="mt-2 text-sm font-display text-foreground">{selectedImage.alt}</span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                className="shrink-0 p-2 rounded-full bg-muted/50 hover:bg-muted transition-colors text-foreground"
+                aria-label="Предыдущее фото"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+              <div className="flex flex-col items-center flex-1 min-w-0">
+                <img
+                  src={selectedImage.src}
+                  alt={selectedImage.alt}
+                  className="max-w-full max-h-[75vh] object-contain rounded-lg"
+                />
+                <span className="mt-2 text-sm font-display text-foreground">{selectedImage.alt}</span>
+              </div>
+              <button
+                onClick={(e) => { e.stopPropagation(); goNext(); }}
+                className="shrink-0 p-2 rounded-full bg-muted/50 hover:bg-muted transition-colors text-foreground"
+                aria-label="Следующее фото"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
             </div>
           )}
         </DialogContent>
