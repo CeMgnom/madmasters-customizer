@@ -29,7 +29,7 @@ const AboutSection = () => {
             viewport={{ once: true }}
           >
             <p className="text-muted-foreground leading-relaxed mb-8">
-              <span className="text-foreground font-display text-lg leading-relaxed">Наша компания специализируемся на кастомизации боковых панелей для Sony PlayStation, превращая вашу консоль в уникальный арт-объект.</span>{" "}
+              <span className="text-foreground font-display text-lg leading-relaxed">Наша компания специализируется на кастомизации боковых панелей для Sony PlayStation, превращая вашу консоль в уникальный арт-объект.</span>{" "}
               Мы печатаем принты любой сложности по вашему запросу, используя высококачественное оборудование и краски. Для обеспечения максимальной долговечности и премиального вида изображение покрывается тремя слоями лака. Это финишное покрытие не только защищает принт, но и придает ему ощутимый, стильный 3D-эффект.
             </p>
             <p className="text-foreground font-display text-lg mb-8">
