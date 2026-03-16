@@ -133,6 +133,17 @@ const Admin = () => {
     fetchImages();
   };
 
+  const swapOrder = async (indexA: number, indexB: number) => {
+    const imgA = images[indexA];
+    const imgB = images[indexB];
+    if (!imgA || !imgB) return;
+    await Promise.all([
+      supabase.from("portfolio_images").update({ display_order: imgB.display_order }).eq("id", imgA.id),
+      supabase.from("portfolio_images").update({ display_order: imgA.display_order }).eq("id", imgB.id),
+    ]);
+    fetchImages();
+  };
+
   if (!authenticated) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
