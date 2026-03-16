@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Trash2, Upload, Eye, EyeOff, ClipboardList, Image } from "lucide-react";
+import { Trash2, Upload, Eye, EyeOff, ClipboardList, Image, ArrowUp, ArrowDown } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -75,11 +75,19 @@ const Admin = () => {
         .from("portfolio")
         .getPublicUrl(fileName);
 
+      // Shift all existing images down
+      for (const img of images) {
+        await supabase
+          .from("portfolio_images")
+          .update({ display_order: img.display_order + 1 })
+          .eq("id", img.id);
+      }
+
       await supabase.from("portfolio_images").insert({
         title: title || file.name,
         image_url: urlData.publicUrl,
         show_on_main: showOnMain,
-        display_order: images.length,
+        display_order: 0,
       });
 
       toast.success("Изображение загружено!");
@@ -122,6 +130,17 @@ const Admin = () => {
       .from("portfolio_images")
       .update({ show_on_main: !current })
       .eq("id", id);
+    fetchImages();
+  };
+
+  const swapOrder = async (indexA: number, indexB: number) => {
+    const imgA = images[indexA];
+    const imgB = images[indexB];
+    if (!imgA || !imgB) return;
+    await Promise.all([
+      supabase.from("portfolio_images").update({ display_order: imgB.display_order }).eq("id", imgA.id),
+      supabase.from("portfolio_images").update({ display_order: imgA.display_order }).eq("id", imgB.id),
+    ]);
     fetchImages();
   };
 
@@ -207,7 +226,7 @@ const Admin = () => {
 
             {/* Images grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {images.map((img) => (
+              {images.map((img, idx) => (
                 <div key={img.id} className="relative group rounded-xl overflow-hidden glow-border shadow-card">
                   <img src={img.image_url} alt={img.title} className="w-full aspect-square object-cover" />
                   <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
@@ -216,11 +235,28 @@ const Admin = () => {
                       <Button
                         size="sm"
                         variant="outline"
+                        onClick={() => swapOrder(idx, idx - 1)}
+                        disabled={idx === 0}
+                        className="border-primary/40"
+                      >
+                        <ArrowUp size={14} />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => swapOrder(idx, idx + 1)}
+                        disabled={idx === images.length - 1}
+                        className="border-primary/40"
+                      >
+                        <ArrowDown size={14} />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
                         onClick={() => toggleMainDisplay(img.id, img.show_on_main)}
                         className="border-primary/40"
                       >
                         {img.show_on_main ? <Eye size={14} /> : <EyeOff size={14} />}
-                        <span className="ml-1 text-xs">{img.show_on_main ? "На главной" : "Скрыто"}</span>
                       </Button>
                       <Button
                         size="sm"
