@@ -226,7 +226,7 @@ const Admin = () => {
 
             {/* Images grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {images.map((img) => (
+              {images.map((img, idx) => (
                 <div key={img.id} className="relative group rounded-xl overflow-hidden glow-border shadow-card">
                   <img src={img.image_url} alt={img.title} className="w-full aspect-square object-cover" />
                   <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
@@ -235,11 +235,28 @@ const Admin = () => {
                       <Button
                         size="sm"
                         variant="outline"
+                        onClick={() => swapOrder(idx, idx - 1)}
+                        disabled={idx === 0}
+                        className="border-primary/40"
+                      >
+                        <ArrowUp size={14} />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => swapOrder(idx, idx + 1)}
+                        disabled={idx === images.length - 1}
+                        className="border-primary/40"
+                      >
+                        <ArrowDown size={14} />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
                         onClick={() => toggleMainDisplay(img.id, img.show_on_main)}
                         className="border-primary/40"
                       >
                         {img.show_on_main ? <Eye size={14} /> : <EyeOff size={14} />}
-                        <span className="ml-1 text-xs">{img.show_on_main ? "На главной" : "Скрыто"}</span>
                       </Button>
                       <Button
                         size="sm"
