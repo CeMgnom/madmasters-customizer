@@ -75,11 +75,19 @@ const Admin = () => {
         .from("portfolio")
         .getPublicUrl(fileName);
 
+      // Shift all existing images down
+      for (const img of images) {
+        await supabase
+          .from("portfolio_images")
+          .update({ display_order: img.display_order + 1 })
+          .eq("id", img.id);
+      }
+
       await supabase.from("portfolio_images").insert({
         title: title || file.name,
         image_url: urlData.publicUrl,
         show_on_main: showOnMain,
-        display_order: images.length,
+        display_order: 0,
       });
 
       toast.success("Изображение загружено!");
