@@ -6,7 +6,7 @@ const plans = [
   {
     name: "Стандарт",
     subtitle: "Печать готового изображения на панель PS5",
-    price: "5 500 ₽",
+    price: "4 990 ₽",
     popular: false,
     features: [
       "Печать вашего изображения",
@@ -18,7 +18,7 @@ const plans = [
   {
     name: "Премиум",
     subtitle: "Разработка уникального дизайна + печать",
-    price: "6 500 ₽",
+    price: "5 990 ₽",
     popular: true,
     features: [
       "Помощь в выборе картинки и работа над ней",
@@ -31,7 +31,7 @@ const plans = [
   {
     name: "Эксклюзив",
     subtitle: "Авторский арт от нашего художника",
-    price: "7 500 ₽",
+    price: "6 990 ₽",
     popular: false,
     features: [
       "Индивидуальный дизайн от художника",
